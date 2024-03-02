@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <title>AAA</title>
+</head>
+<body>
+        <canvas id="screen"></canvas>
+        <canvas id="void"></canvas>
+        <canvas id="background"></canvas>
+        <canvas id="wallslayer"></canvas>
+        <canvas id="walls"></canvas>
+        <div id="fade" class="fade"></div>
+        <menu id="menu">
+            <div>SFX VOLUME</div>
+            <input type="range" min="0" max="10" class="slider" id="sfxvol">
+            <div>MUSIC VOLUME</div>
+            <input type="range" min="0" max="10" class="slider" id="mscvol">
+        </menu>
+        <canvas id="mbcanvas"></canvas>
+        <canvas id="mnbcanvas"></canvas>
+        <script src="levels.js"></script>
+        <script src="game.js"></script>
+        <button id="mutebutton" onclick="settings.soundmute(); this.blur();"></button>
+        <button id="menubutton" onclick="settings.menushow(); this.blur();"></button>
+</body>
+</html>
