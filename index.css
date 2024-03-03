@@ -1,0 +1,19 @@
+@font-face {
+    font-family: DOS;
+    src: url(Windows\ Regular.ttf);
+}
+body {
+    background-color: black;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    color: white;
+    font-family: DOS;
+}
+logo {
+    margin-top: 40px;
+}
+a {
+    color: lightgrey;
+    font-size: 25px;
+}
