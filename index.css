@@ -37,3 +37,18 @@ a {
 .quibble {
     margin: 35px 0px;
 }
+.row {
+    display: flex;
+    flex-direction: row;
+}
+.column {
+    display: flex;
+    flex-direction: column;
+    margin: 0px 20px;
+    align-items: center;
+}
+.gif {
+    margin-top: 20px;
+    width: 320px;
+    height: 240px;
+}
