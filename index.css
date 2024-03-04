@@ -3,17 +3,37 @@
     src: url(Windows\ Regular.ttf);
 }
 body {
-    background-color: black;
+    background-color: rgb(20, 20, 20);
     display: flex;
     flex-direction: column;
     align-items: center;
     color: white;
     font-family: DOS;
+    height: 100%;
+    margin: 0;
+    font-size: 20px;
+}
+html {
+    height: 100%;
 }
 logo {
     margin-top: 40px;
 }
 a {
     color: lightgrey;
-    font-size: 25px;
+    font-size: 30px;
+}
+#void {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+    margin: 0;
+    z-index: -5;
+}
+.quibble {
+    margin: 35px 0px;
 }
