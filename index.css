@@ -18,6 +18,8 @@ html {
 }
 logo {
     margin-top: 40px;
+    max-width: 680px;
+    max-height: 110px;
 }
 a {
     color: lightgrey;
@@ -40,6 +42,7 @@ a {
 .row {
     display: flex;
     flex-direction: row;
+    max-width: 1133px;
 }
 .column {
     display: flex;
