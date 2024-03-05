@@ -30,21 +30,29 @@ resetsfx.src = 'sfx/noise.wav';
 
 //TRACKS
 const ambience = new Audio();
-ambience.src = 'tracks/ambience.wav';
+ambience.src = 'tracks/ambience.mp3';
 ambience.loop = true;
 ambience.volume = 0.8;
 const track1 = new Audio();
-track1.src = 'tracks/track1.wav';
+track1.src = 'tracks/track1.mp3';
 track1.loop = true;
 track1.volume = 0.6;
 const track2 = new Audio();
-track2.src = 'tracks/track2.wav';
+track2.src = 'tracks/track2.mp3';
 track2.loop = true;
 track2.volume = 0.6;
 const track3 = new Audio();
-track3.src = 'tracks/track3.wav';
+track3.src = 'tracks/track3.mp3';
 track3.loop = true;
 track3.volume = 0.6;
+const track4 = new Audio();
+track4.src = 'tracks/track4.mp3';
+track4.loop = true;
+track4.volume = 0.6;
+const track5 = new Audio();
+track5.src = 'tracks/track1_2.mp3';
+track5.loop = true;
+track5.volume = 0.6;
 
 class Settings {
     constructor() {
