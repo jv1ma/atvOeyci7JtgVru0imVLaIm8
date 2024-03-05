@@ -154,6 +154,7 @@ noisevoid.width = document.body.clientWidth;
 
 boxindex = -1;
 stg = 0;
+if (document.cookie) stg = parseInt(document.cookie);
 pushstate = 0;
 colorstate = 0;
 blocked = 0;
@@ -705,6 +706,7 @@ class End {
     detect(x, y) {
         if (x === px && y === py) {
             stg++;
+            document.cookie = `${stg}; max-age=31536000`;
             endsfx.currentTime = 0;
             endsfx.play();
             reset();
