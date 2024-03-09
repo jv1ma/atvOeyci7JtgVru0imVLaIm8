@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="game.css">
+    <title>Q U I B B L Y</title>
+</head>
+<body>
+        <canvas id="screen"></canvas>
+        <canvas id="void"></canvas>
+        <canvas id="background"></canvas>
+        <canvas id="wallslayer"></canvas>
+        <canvas id="walls"></canvas>
+        <div id="fade" class="fade"></div>
+        <menu id="menu">
+            <div>SFX VOLUME</div>
+            <input type="range" min="0" max="10" class="slider" id="sfxvol">
+            <div>MUSIC VOLUME</div>
+            <input type="range" min="0" max="10" class="slider" id="mscvol">
+            <div class="scopt">
+                <div>SCALING</div>
+                <select value="64" id="resolution" onchange="settings.updateres();">
+                    <option value="128">128 pixels</option>
+                    <option value="64" selected="selected">64 pixels</option>
+                    <option value="32">32 pixels</option>
+                    <option value="16">16 pixels</option>
+                </select>
+                <div>
+                    <label for="autosc">AUTO SCALING</label>
+                    <input type="checkbox" id="autosc" checked/>
+                </div>
+            </div>
+            <button id="reset" onclick="settings.resetprog();">RESET PROGRESS</button>
+        </menu>
+        <canvas id="mbcanvas"></canvas>
+        <canvas id="mnbcanvas"></canvas>
+        <canvas id="rbcanvas"></canvas>
+        <canvas id="sbcanvas"></canvas>
+        <div class="movb">
+            <canvas id="rdcanvas"></canvas>
+            <canvas id="lacanvas"></canvas>
+            <canvas id="uwcanvas"></canvas>
+            <canvas id="dscanvas"></canvas>
+            <script src="levels.js"></script>
+            <script src="game.js"></script>
+            <button id="uwbutton" onclick="settings.uwbutton(); this.blur();"></button>
+            <button id="dsbutton" onclick="settings.dsbutton(); this.blur();"></button>
+            <button id="labutton" onclick="settings.labutton(); this.blur();"></button>
+            <button id="rdbutton" onclick="settings.rdbutton(); this.blur();"></button>
+        </div>
+        <button id="mutebutton" onclick="settings.soundmute(); this.blur();"></button>
+        <button id="menubutton" onclick="settings.menushow(); this.blur();"></button>
+        <button id="resetbutton" onclick="settings.rbutton(); this.blur();"></button>
+        <button id="switchbutton" onclick="settings.sbutton(); this.blur();"></button>
+</body>
+</html>

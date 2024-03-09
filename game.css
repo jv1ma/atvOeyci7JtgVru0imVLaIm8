@@ -1,0 +1,204 @@
+@font-face {
+    font-family: DOS;
+    src: url(Windows\ Regular.ttf);
+}
+html {
+    height: 100%;
+}
+body {
+    display: flex;
+    align-items: end;
+    justify-content: center;
+    background: radial-gradient();
+    min-height: 100%;
+    margin: 0; 
+    width: 100vw;
+    font-family: DOS;
+    font-size: 25px;
+    font-weight: bold;
+}
+canvas {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border-style: solid;
+    border-color: transparent;
+    border-width: 4px;
+    background-color: transparent;
+}
+.fade {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-color: black;
+}
+#void {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    border: 0;
+    background-color: transparent;
+    border-color: transparent;
+    margin: 0;
+}
+button {
+    z-index: 5;
+    background-color: transparent;
+    border: 0;
+    padding: 0;
+    font-family: DOS;
+    font-size: 25px;
+    font-weight: bold;
+}
+#mutebutton, #mbcanvas {
+    position: absolute;
+    right: 9%;
+    top: 3%;
+    width: 96px;
+    height: 96px;
+}
+#menubutton, #mnbcanvas {
+    position: absolute;
+    right: 2%;
+    top: 3%;
+    width: 96px;
+    height: 96px;
+}
+#resetbutton, #rbcanvas{
+    position: absolute;
+    right: 2%;
+    bottom: 3%;
+    width: 96px;
+    height: 96px;
+}
+#sbcanvas, #rbcanvas {
+    width: 96px;
+    height: 96px;
+    transform: revert;
+    left: revert;
+    top: revert;
+}
+#switchbutton, #sbcanvas {
+    position: absolute;
+    right: 2%;
+    bottom: 16%;
+    width: 96px;
+    height: 96px;
+}
+#mbcanvas, #mnbcanvas {
+    width: 96px;
+    height: 96px;
+    transform: revert;
+    left: revert;
+    z-index: 4;
+}
+menu {
+    padding: 0;
+    background-color: black;
+    height: 100%;
+    width: 315px;
+    margin: 0;
+    position: absolute;
+    right: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 70px;
+    color: white;
+    visibility: hidden;
+    z-index: 3;
+}
+.slider {
+    margin: 15px 0px;
+    height: 10px;
+    appearance: none;
+    background: #808080;
+    outline: none;
+    appearance: none;
+}
+.slider::-webkit-slider-thumb {
+    appearance: none;
+    width: 8px;
+    height: 25px;
+    background: #808080;
+    border-radius: 0;
+    border-color: transparent;
+
+}
+.slider::-moz-range-thumb {
+    appearance: none;
+    width: 8px;
+    height: 25px;
+    outline: none;
+    background: #808080;
+    border-radius: 0;
+    border-color: transparent;
+}
+select {
+    font-family: DOS;
+    font-size: 25px;
+    color: inherit;
+    background-color: inherit;
+    border: 0;
+    font-weight: bold;
+}
+option {
+    font-family: DOS;
+    color: inherit;
+}
+#reset {
+    margin: 10px 0px;
+    padding: 2px 10px;
+}
+.scopt {
+    margin: 20px 0px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+input[type='checkbox'] {
+    height: 1.6em;
+    width: 1.6em;
+}
+.movb {
+    position: absolute;
+    left: 2%;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    bottom: 3%;
+    width: 318px;
+    height: 318px;
+    grid-template-rows: repeat(3, 1fr);
+}
+#uwcanvas, #uwbutton {
+    grid-column: 2 / 3;
+    grid-row: 1;
+    left: revert;
+    top: revert;
+    transform: revert;
+}
+#dscanvas, #dsbutton {
+    grid-column: 2 / 3;
+    grid-row: 3;
+    left: revert;
+    top: revert;
+    transform: revert;
+}
+#lacanvas, #labutton {
+    grid-column: 1 / 2;
+    grid-row: 2;
+    left: revert;
+    top: revert;
+    transform: revert;
+}
+#rdcanvas, #rdbutton {
+    grid-column: 3 / 4;
+    grid-row: 2;
+    left: revert;
+    top: revert;
+    transform: revert;
+}
