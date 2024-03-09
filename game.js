@@ -165,8 +165,10 @@ class Settings {
         keys.push('d');
     }
     render() {
-        mbctxt.fillStyle = mnbctxt.fillStyle = rbctxt.fillStyle = sbctxt.fillStyle = uwctxt.fillStyle = dsctxt.fillStyle = lactxt.fillStyle = rdctxt.fillStyle = 
+        rbctxt.fillStyle = sbctxt.fillStyle = uwctxt.fillStyle = dsctxt.fillStyle = lactxt.fillStyle = rdctxt.fillStyle = 
         `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%)`;
+        mbctxt.fillStyle = mnbctxt.fillStyle = 
+        `hsl(${palette[Math.abs(colorstate-1)].hsl[0]}, ${palette[Math.abs(colorstate-1)].hsl[1]}%, ${palette[Math.abs(colorstate-1)].hsl[2]}%)`;
         mbctxt.clearRect(0, 0, 96, 96);
         mnbctxt.clearRect(0, 0, 96, 96);
         rbctxt.clearRect(0, 0, 96, 96);
