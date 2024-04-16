@@ -897,88 +897,102 @@ class Wall {
         context.fillStyle = `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%`;
         for (let r = 0; r < level.gridsize[1]; r++) {
             for (let c = 0; c < level.gridsize[0]; c++) {
-                if (level.walls[colorstate][r][c] === 1) {
-                    context.fillRect(c*rs, r*rs, rs, rs);
-                    context.clearRect(c*rs+(pix*2), r*rs+(pix*2), rs-(pix*4), rs-(pix*4));
-                    if (r === 0 || level.walls[colorstate][r-1][c] === 1) {
-                        context.clearRect(c*rs+(pix*2), r*rs, rs-(pix*4), (pix*2));
-                    }
-                    if (r === level.gridsize[1]-1 || level.walls[colorstate][r+1][c] === 1) {
-                        context.clearRect(c*rs+(pix*2), r*rs+(pix*14), rs-(pix*4), (pix*2));
-                    }
-                    if (c === 0 || level.walls[colorstate][r][c-1] === 1) {
-                        context.clearRect(c*rs, r*rs+(pix*2), (pix*2), rs-(pix*4));
-                    }
-                    if (c === level.gridsize[0]-1 || level.walls[colorstate][r][c+1] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs+(pix*2), (pix*2), rs-(pix*4));
-                    }
-
-                    if (r === 0 && c === 0) {
-                        context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
-                    }
-                    else if (r === level.gridsize[1]-1 && c === 0) {
-                        context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-                    else if (r === 0 && c === level.gridsize[0]-1) {
-                        context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
-                    }
-                    else if (r === level.gridsize[1]-1 && c === level.gridsize[0]-1) {
-                        context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-
-                    if (c === 0 && r !== 0 && level.walls[colorstate][r-1][c] === 1) {
-                        context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
-                    }
-                    if (r === 0 && c !== 0 && level.walls[colorstate][r][c-1] === 1) {
-                        context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
-                    }
-                    if (c !== 0 && r !== 0 && level.walls[colorstate][r][c-1] === 1 && level.walls[colorstate][r-1][c] === 1 && level.walls[colorstate][r-1][c-1] === 1) {
-                        context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
-                    }
-
-                    if (c === 0 && r !== level.gridsize[1]-1 && level.walls[colorstate][r+1][c] === 1) {
-                        context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-                    if (r === level.gridsize[1]-1 && c !== 0 && level.walls[colorstate][r][c-1] === 1) {
-                        context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-                    if (c !== 0 && r !== level.gridsize[1]-1 && level.walls[colorstate][r][c-1] === 1 && level.walls[colorstate][r+1][c] === 1 && level.walls[colorstate][r+1][c-1] === 1) {
-                        context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-
-                    if (r === 0 && c !== level.gridsize[0]-1 && level.walls[colorstate][r][c+1] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
-                    }
-                    if (c === level.gridsize[0]-1 && r !== 0 && level.walls[colorstate][r-1][c] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
-                    }
-                    if (r !== 0 && c !== level.gridsize[0]-1 && level.walls[colorstate][r][c+1] === 1 && level.walls[colorstate][r-1][c] === 1 && level.walls[colorstate][r-1][c+1] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
-                    }
-
-                    if (r === level.gridsize[1]-1 && c !== level.gridsize[0]-1 && level.walls[colorstate][r][c+1] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-                    if (c === level.gridsize[0]-1 && r !== level.gridsize[1]-1 && level.walls[colorstate][r+1][c] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-                    if (r !== level.gridsize[1]-1 && c !== level.gridsize[0]-1 && level.walls[colorstate][r][c+1] === 1 && level.walls[colorstate][r+1][c] === 1 && level.walls[colorstate][r+1][c+1] === 1) {
-                        context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
-                    }
-
-                    context2.fillStyle = `hsla(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%, 0.3)`
-                    let e = 0;
-                    let ran = 0;
-                    for (let i = 0; e < 16; i++) {
-                        if (i === 8) {
-                            i = 0;
-                            e++;
-                            if (e === 8) break;
+                if (c !== px || r !== py) {
+                    if (level.walls[colorstate][r][c] === 1) {
+                        context.fillRect(c*rs, r*rs, rs, rs);
+                        context.clearRect(c*rs+(pix*2), r*rs+(pix*2), rs-(pix*4), rs-(pix*4));
+                        if (r === 0 || level.walls[colorstate][r-1][c] === 1 && (r-1 !== py || c !==px)) {
+                            context.clearRect(c*rs+(pix*2), r*rs, rs-(pix*4), (pix*2));
                         }
-                        seed = i * 2 * e + 64 + colorstate + seed;
-                        ran = random();
-                        if (ran >= 0.5) {
-                            context2.fillRect(c*rs+(pix*2)*i, r*rs+(pix*2)*e, (pix*2), (pix*2));
+                        if (r === level.gridsize[1]-1 || level.walls[colorstate][r+1][c] === 1 && (r+1 !== py || c !==px)) {
+                            context.clearRect(c*rs+(pix*2), r*rs+(pix*14), rs-(pix*4), (pix*2));
+                        }
+                        if (c === 0 || level.walls[colorstate][r][c-1] === 1 && (r !== py || c-1 !==px)) {
+                            context.clearRect(c*rs, r*rs+(pix*2), (pix*2), rs-(pix*4));
+                        }
+                        if (c === level.gridsize[0]-1 || level.walls[colorstate][r][c+1] === 1 && (r !== py || c+1 !==px)) {
+                            context.clearRect(c*rs+(pix*14), r*rs+(pix*2), (pix*2), rs-(pix*4));
+                        }
+    
+                        if (r === 0 && c === 0) {
+                            context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
+                        }
+                        else if (r === level.gridsize[1]-1 && c === 0) {
+                            context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+                        else if (r === 0 && c === level.gridsize[0]-1) {
+                            context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
+                        }
+                        else if (r === level.gridsize[1]-1 && c === level.gridsize[0]-1) {
+                            context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+    
+                        if (c === 0 && r !== 0 && !(py === r-1 && c === px) && level.walls[colorstate][r-1][c] === 1) {
+                            context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
+                        }
+                        if (r === 0 && c !== 0 && !(px === c-1 && r === py) && level.walls[colorstate][r][c-1] === 1) {
+                            context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
+                        }
+                        if (c !== 0 && r !== 0 && 
+                            (level.walls[colorstate][r][c-1] === 1 && !(r === py && c-1 === px)) && 
+                            (level.walls[colorstate][r-1][c] === 1 && !(c === px && r-1 === py)) && 
+                            (level.walls[colorstate][r-1][c-1] === 1 && !(c-1 === px && r-1 === py))) {
+                            context.clearRect(c*rs, r*rs, (pix*2), (pix*2));
+                        }
+
+                        if (c === 0 && r !== level.gridsize[1]-1 && !(py === r+1 && c === px) && level.walls[colorstate][r+1][c] === 1) {
+                            context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+                        if (r === level.gridsize[1]-1 && c !== 0 && !(px === c-1 && r === py) && level.walls[colorstate][r][c-1] === 1) {
+                            context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+                        if (c !== 0 && r !== level.gridsize[1]-1 && 
+                            (level.walls[colorstate][r][c-1] === 1 && !(r === py && c-1 === px)) && 
+                            (level.walls[colorstate][r+1][c] === 1 && !(c === px && r+1 === py)) && 
+                            (level.walls[colorstate][r+1][c-1] === 1 && !(c-1 === px && r+1 === py))) {
+                            context.clearRect(c*rs, r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+
+                        if (r === 0 && c !== level.gridsize[0]-1 && !(px === c+1 && r === py) && level.walls[colorstate][r][c+1] === 1) {
+                            context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
+                        }
+                        if (c === level.gridsize[0]-1 && r !== 0 && !(py === r-1 && c === px) && level.walls[colorstate][r-1][c] === 1) {
+                            context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
+                        }
+                        if (r !== 0 && c !== level.gridsize[0]-1 && 
+                            (level.walls[colorstate][r][c+1] === 1 && !(r === py && c+1 === px)) && 
+                            (level.walls[colorstate][r-1][c] === 1 && !(c === px && r-1 === py)) && 
+                            (level.walls[colorstate][r-1][c+1] === 1 && !(c+1 === px && r-1 === py))) {
+                            context.clearRect(c*rs+(pix*14), r*rs, (pix*2), (pix*2));
+                        }
+
+                        if (r === level.gridsize[1]-1 && c !== level.gridsize[0]-1 && !(px === c+1 && r === py) && level.walls[colorstate][r][c+1] === 1) {
+                            context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+                        if (c === level.gridsize[0]-1 && r !== level.gridsize[1]-1 && !(py === r+1 && c === px) && level.walls[colorstate][r+1][c] === 1) {
+                            context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+                        if (r !== level.gridsize[1]-1 && c !== level.gridsize[0]-1 && 
+                            (level.walls[colorstate][r][c+1] === 1 && !(r === py && c+1 === px)) && 
+                            (level.walls[colorstate][r+1][c] === 1 && !(c === px && r+1 === py)) && 
+                            (level.walls[colorstate][r+1][c+1] === 1 && !(c+1 === px && r+1 === py))) {
+                            context.clearRect(c*rs+(pix*14), r*rs+(pix*14), (pix*2), (pix*2));
+                        }
+
+                        context2.fillStyle = `hsla(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%, 0.3)`
+                        let e = 0;
+                        let ran = 0;
+                        for (let i = 0; e < 16; i++) {
+                            if (i === 8) {
+                                i = 0;
+                                e++;
+                                if (e === 8) break;
+                            }
+                            seed = i * 2 * e + 64 + colorstate + seed;
+                            ran = random();
+                            if (ran >= 0.5) {
+                                context2.fillRect(c*rs+(pix*2)*i, r*rs+(pix*2)*e, (pix*2), (pix*2));
+                            }
                         }
                     }
                 }
