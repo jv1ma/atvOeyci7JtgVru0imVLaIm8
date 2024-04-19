@@ -24,6 +24,9 @@ logo {
 a {
     color: lightgrey;
     font-size: 30px;
+    display: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
 }
 #void {
     position: absolute;
@@ -54,4 +57,16 @@ a {
     margin-top: 20px;
     width: 320px;
     height: 240px;
+}
+p {
+    text-align: center;
+}
+.sm {
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+}
+.smicon {
+    height: 64px;
+    width: 64px;
 }
