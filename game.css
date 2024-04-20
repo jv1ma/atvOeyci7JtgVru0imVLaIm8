@@ -153,6 +153,11 @@ option {
     margin: 10px 0px;
     padding: 2px 10px;
 }
+#resetends {
+    margin: 10px 0px;
+    padding: 2px 10px;
+    background-color: white;
+}
 .scopt {
     margin: 20px 0px;
     display: flex;
@@ -201,4 +206,42 @@ input[type='checkbox'] {
     left: revert;
     top: revert;
     transform: revert;
+}
+.endscreenbg {
+    flex-direction: column;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: black;
+    width: 100vw;
+    height: 100vh;
+    z-index: 10;
+    color: white;
+}
+img {
+    margin-bottom: 20px;
+}
+a {
+    color: lightgrey;
+    font-size: 30px;
+    display: inherit;
+    flex-direction: inherit;
+    align-items: inherit;
+}
+.sm {
+    align-items: center;
+    justify-content: center;
+    margin: 0px 10px;
+}
+.smicon {
+    height: 64px;
+    width: 64px;
+}
+.row {
+    display: flex;
+    flex-direction: row;
+    max-width: 1133px;
+}
+p {
+    max-width: 50vw;
 }
