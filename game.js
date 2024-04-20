@@ -334,10 +334,10 @@ function reset() {
     else {
         track2.pause();
     }
-    if (stg >= 17) {
+    if (stg >= 15) {
         track3.play();
     }
-    if (stg > 16) {
+    if (stg > 15) {
         track3.pause();
         settings.soundmute(1);
         endscreen.style.visibility = 'visible';
