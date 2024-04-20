@@ -8,6 +8,24 @@
     <title>Q U I B B L Y</title>
 </head>
 <body>
+    <div class="endscreenbg" id="endscreen">
+        <h1>! STOP !</h1>
+        <p>Congratulations! You have finished the current set of levels. You can reset your<br>progress and play again, or save your progress for later. New levels will be added<br>soon; follow us on social media for updates!</p>
+        <div class="row sm">
+            <a href="https://www.instagram.com/quibblygame/">
+                <img src="instagram.png" class="smicon sm">
+                <span class="sm">Instagram</span>
+            </a>
+            <a href="https://www.facebook.com/profile.php?id=61558605928654">
+                <img src="facebook.png" class="smicon sm">
+                <span class="sm">Facebook</span>
+            </a>
+        </div>
+        <span><br></span>
+        <img src="quibblestat.png">
+        <button id="resetends" onclick="settings.resetprog();">RESET PROGRESS</button>
+        <span><br></span>
+    </div>
         <canvas id="screen"></canvas>
         <canvas id="void"></canvas>
         <canvas id="background"></canvas>
@@ -29,6 +47,11 @@
                 </select>
                 <div>
                     <label for="autosc">AUTO SCALING</label>
+                    <input type="checkbox" id="autosc" checked/>
+                </div>
+                <span><br></span>
+                <div>
+                    <label for="autosc">MOBILE CONTROLLS</label>
                     <input type="checkbox" id="autosc" checked/>
                 </div>
             </div>

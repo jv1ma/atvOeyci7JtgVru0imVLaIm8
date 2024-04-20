@@ -7,6 +7,8 @@ const rbctxt = resetbuttoncanvas.getContext('2d');
 const switchbuttoncanvas = document.getElementById('sbcanvas');
 const sbctxt = switchbuttoncanvas.getContext('2d');
 
+const endscreen = document.getElementById('endscreen');
+
 const upbuttoncanvas = document.getElementById('uwcanvas');
 const uwctxt = upbuttoncanvas.getContext('2d');
 const downbuttoncanvas = document.getElementById('dscanvas');
@@ -105,8 +107,11 @@ class Settings {
             menu.style.visibility = 'hidden';
         }
     }
-    soundmute() {
-        if (this.mute === 1) {
+    soundmute(x) {
+        if (x === 1) {
+            this.mute = 1;
+        }
+        else if (this.mute === 1 || x === 2) {
             this.mute = 0;
         }
         else {
@@ -305,7 +310,6 @@ function reset() {
     colorstate = 0;
     fadea = 1; 
     goala = 0;
-
     if (stg < 4) {
         ambience.play();
     }
@@ -324,11 +328,16 @@ function reset() {
     else {
         track2.pause();
     }
-    if (stg >= 15) {
+    if (stg >= 14) {
         track3.play();
     }
-    else {
+    if (stg > 16) {
         track3.pause();
+        settings.soundmute(1);
+        endscreen.style.visibility = 'visible';
+    }
+    else {
+        endscreen.style.visibility = 'hidden';
     }
 
     level = levels.data[stg];
