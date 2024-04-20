@@ -179,6 +179,11 @@ class Settings {
         rbctxt.clearRect(0, 0, 96, 96);
         sbctxt.clearRect(0, 0, 96, 96);
 
+        uwctxt.clearRect(0, 0, 96, 96);
+        lactxt.clearRect(0, 0, 96, 96);
+        rdctxt.clearRect(0, 0, 96, 96);
+        dsctxt.clearRect(0, 0, 96, 96);
+
         mnbctxt.fillRect(12, 16, 72, 12);
         mnbctxt.fillRect(12, 40, 72, 12);
         mnbctxt.fillRect(12, 64, 72, 12);
