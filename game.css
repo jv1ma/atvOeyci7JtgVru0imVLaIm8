@@ -217,6 +217,7 @@ input[type='checkbox'] {
     height: 100vh;
     z-index: 10;
     color: white;
+    visibility: hidden;
 }
 img {
     margin-bottom: 20px;
