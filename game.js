@@ -329,7 +329,7 @@ function reset() {
     else {
         track2.pause();
     }
-    if (stg >= 15) {
+    if (stg >= 16) {
         track3.play();
     }
     if (stg > 16) {
