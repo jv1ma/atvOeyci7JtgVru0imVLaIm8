@@ -210,44 +210,45 @@ class Settings {
             mbctxt.fillRect(72, 30, 6, 6);
             mbctxt.fillRect(72, 60, 6, 6);
         }
+        if (document.getElementById('mbcon').checked === true) {
+            sbctxt.fillRect(12, 12, 72, 72);
+            sbctxt.clearRect(18, 18, 60, 60);
+            sbctxt.fillRect(42, 30, 12, 24);
+            sbctxt.fillRect(42, 60, 12, 6);
 
-        sbctxt.fillRect(12, 12, 72, 72);
-        sbctxt.clearRect(18, 18, 60, 60);
-        sbctxt.fillRect(42, 30, 12, 24);
-        sbctxt.fillRect(42, 60, 12, 6);
+            rbctxt.fillRect(12, 12, 72, 72);
+            rbctxt.clearRect(18, 18, 60, 60);
+            rbctxt.fillRect(30, 30, 12, 36);
+            rbctxt.fillRect(42, 30, 18, 6);
+            rbctxt.fillRect(42, 48, 18, 6);
+            rbctxt.fillRect(54, 36, 12, 12);
+            rbctxt.fillRect(54, 54, 12, 12);
+            rbctxt.fillRect(48, 54, 6, 6);
 
-        rbctxt.fillRect(12, 12, 72, 72);
-        rbctxt.clearRect(18, 18, 60, 60);
-        rbctxt.fillRect(30, 30, 12, 36);
-        rbctxt.fillRect(42, 30, 18, 6);
-        rbctxt.fillRect(42, 48, 18, 6);
-        rbctxt.fillRect(54, 36, 12, 12);
-        rbctxt.fillRect(54, 54, 12, 12);
-        rbctxt.fillRect(48, 54, 6, 6);
+            uwctxt.fillRect(12, 12, 72, 72);
+            uwctxt.clearRect(18, 18, 60, 60);
+            uwctxt.fillRect(42, 30, 12, 36);
+            uwctxt.fillRect(30, 42, 36, 6);
+            uwctxt.fillRect(36, 36, 24, 6);
 
-        uwctxt.fillRect(12, 12, 72, 72);
-        uwctxt.clearRect(18, 18, 60, 60);
-        uwctxt.fillRect(42, 30, 12, 36);
-        uwctxt.fillRect(30, 42, 36, 6);
-        uwctxt.fillRect(36, 36, 24, 6);
+            lactxt.fillRect(12, 12, 72, 72);
+            lactxt.clearRect(18, 18, 60, 60);
+            lactxt.fillRect(30, 42, 36, 12);
+            lactxt.fillRect(42, 30, 6, 36);
+            lactxt.fillRect(36, 36, 6, 24);
 
-        lactxt.fillRect(12, 12, 72, 72);
-        lactxt.clearRect(18, 18, 60, 60);
-        lactxt.fillRect(30, 42, 36, 12);
-        lactxt.fillRect(42, 30, 6, 36);
-        lactxt.fillRect(36, 36, 6, 24);
+            dsctxt.fillRect(12, 12, 72, 72);
+            dsctxt.clearRect(18, 18, 60, 60);
+            dsctxt.fillRect(42, 30, 12, 36);
+            dsctxt.fillRect(30, 48, 36, 6);
+            dsctxt.fillRect(36, 54, 24, 6);
 
-        dsctxt.fillRect(12, 12, 72, 72);
-        dsctxt.clearRect(18, 18, 60, 60);
-        dsctxt.fillRect(42, 30, 12, 36);
-        dsctxt.fillRect(30, 48, 36, 6);
-        dsctxt.fillRect(36, 54, 24, 6);
-
-        rdctxt.fillRect(12, 12, 72, 72);
-        rdctxt.clearRect(18, 18, 60, 60);
-        rdctxt.fillRect(30, 42, 36, 12);
-        rdctxt.fillRect(48, 30, 6, 36);
-        rdctxt.fillRect(54, 36, 6, 24);
+            rdctxt.fillRect(12, 12, 72, 72);
+            rdctxt.clearRect(18, 18, 60, 60);
+            rdctxt.fillRect(30, 42, 36, 12);
+            rdctxt.fillRect(48, 30, 6, 36);
+            rdctxt.fillRect(54, 36, 6, 24);
+        }
     }
 }
 var settings = new Settings();
