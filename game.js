@@ -148,7 +148,7 @@ class Settings {
     }
     resetprog() {
         stg = 0;
-        document.cookie = `0; max-age=0`;
+        document.cookie = `stg=0; max-age=0`;
         reset();
     }
     rbutton() {
@@ -822,7 +822,7 @@ class End {
     detect(x, y) {
         if (x === px && y === py) {
             stg++;
-            document.cookie = `${stg}; max-age=31536000`;
+            document.cookie = `stg=${stg}; max-age=31536000; `;
             endsfx.currentTime = 0;
             endsfx.play();
             reset();
