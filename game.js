@@ -89,6 +89,31 @@ const contxtwall = wallc.getContext('2d');
 const contxtwalll = wallcl.getContext('2d');
 const fade = document.getElementById('fade');
 
+//robar codigo es mi pasion
+function hslToHex(h, s, l) { 
+    l /= 100;
+    const a = s * Math.min(l, 1 - l) / 100;
+    const f = n => {
+      const k = (n + h / 30) % 12;
+      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
+      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
+    };
+    return `#${f(0)}${f(8)}${f(4)}`;
+}
+
+var seed = 1538;
+function random() {
+    var x = Math.sin(seed) * 10000;
+    return x - Math.floor(x);
+}
+
+function getCookie(name) {
+    const value = `; ${document.cookie}`;
+    const parts = value.split(`; ${name}=`);
+    if (parts.length === 2) return parts.pop().split(';').shift();
+}
+//robo completado
+
 class Settings {
     constructor() {
         this.mute = 0;
@@ -369,7 +394,7 @@ noisevoid.width = document.body.clientWidth;
 
 boxindex = -1;
 stg = 0;
-if (!!parseInt(document.cookie.slice(-1))) stg = parseInt(document.cookie.slice(-1));
+if (!!parseInt(getCookie('stg'))) stg = parseInt(getCookie('stg'));
 pushstate = 0;
 colorstate = 0;
 blocked = 0;
@@ -382,25 +407,6 @@ kr = 0;
 kspc = 0;
 
 reset();
-
-//robar codigo es mi pasion
-function hslToHex(h, s, l) { 
-    l /= 100;
-    const a = s * Math.min(l, 1 - l) / 100;
-    const f = n => {
-      const k = (n + h / 30) % 12;
-      const color = l - a * Math.max(Math.min(k - 3, 9 - k, 1), -1);
-      return Math.round(255 * color).toString(16).padStart(2, '0');   // convert to Hex and prefix "0" if needed
-    };
-    return `#${f(0)}${f(8)}${f(4)}`;
-}
-
-var seed = 1538;
-function random() {
-    var x = Math.sin(seed) * 10000;
-    return x - Math.floor(x);
-}
-//robo completado
 
 class Input {
     constructor() {
