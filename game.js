@@ -369,7 +369,7 @@ noisevoid.width = document.body.clientWidth;
 
 boxindex = -1;
 stg = 0;
-if (!!parseInt(document.cookie)) stg = parseInt(document.cookie.charAt(0));
+if (!!parseInt(document.cookie.slice(-1))) stg = parseInt(document.cookie.slice(-1));
 pushstate = 0;
 colorstate = 0;
 blocked = 0;
