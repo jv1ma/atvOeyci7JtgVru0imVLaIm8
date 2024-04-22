@@ -89,6 +89,9 @@ const contxtwall = wallc.getContext('2d');
 const contxtwalll = wallcl.getContext('2d');
 const fade = document.getElementById('fade');
 
+stg = 0;
+if (document.cookie) stg = parseInt(document.cookie);
+
 class Settings {
     constructor() {
         this.mute = 0;
