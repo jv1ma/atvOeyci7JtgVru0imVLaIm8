@@ -35,35 +35,68 @@
         <canvas id="walls"></canvas>
         <div id="fade" class="fade"></div>
         <menu id="menu">
+            <span><br><br><br><br><br><br></span>
             <div>SFX VOLUME</div>
             <input type="range" min="0" max="10" class="slider" id="sfxvol">
             <div>MUSIC VOLUME</div>
             <input type="range" min="0" max="10" class="slider" id="mscvol">
+            <div><br></div>
+            <div>
+                <label for="mbcon">MOBILE CONTROLLS</label>
+                    <input type="checkbox" id="mbcon" checked/>
+            </div>
             <div class="scopt">
                 <div>SCALING</div>
                 <select value="64" id="resolution" onchange="settings.updateres();">
-                    <option value="128">128 pixels</option>
-                    <option value="64" selected="selected">64 pixels</option>
-                    <option value="32">32 pixels</option>
-                    <option value="16">16 pixels</option>
+                        <option value="4">128 pixels</option>
+                        <option value="3" selected="selected">64 pixels</option>
+                        <option value="2">32 pixels</option>
+                        <option value="1">16 pixels</option>
                 </select>
                 <div>
                     <label for="autosc">AUTO SCALING</label>
-                    <input type="checkbox" id="autosc" checked/>
-                </div>
-                <span><br></span>
-                <div>
-                    <label for="mbcon">MOBILE CONTROLLS</label>
-                    <input type="checkbox" id="mbcon" checked/>
+                    <input type="checkbox" id="autosc" checked onchange="settings.updateres();"/>
                 </div>
             </div>
-            <button id="reset" onclick="settings.resetprog();">RESET PROGRESS</button>
+            <div>
+                <label for="rmnoise">REMOVE NOISE</label>
+                <input type="checkbox" id="rmnoise" onchange="settings.updatenoise();"/>
+            </div>
+            <div>
+                <label for="rmnoise">SOLID BACKGROUND</label>
+                <input type="checkbox" id="solidbk" onchange="settings.updatesolidbk();"/>
+            </div>
+            <div>
+                <label for="owcol">OVERWRITE COLORS</label>
+                <input type="checkbox" id="owcol" onchange="settings.coloropt(); settings.updatepal();"/>
+            </div>
+            <div class="coloropt" id="coloropt">
+                <span class="collab">COLOR 1</span>
+                <div class="hslrow">
+                        <label for="hcol1">H: </label>
+                        <input type="number" id="hcol1" min="0" max="360" value="0" onchange="settings.updatepal();"/>
+                        <label for="hcol1">S: </label>
+                        <input type="number" id="scol1" min="0" max="100" value="0" onchange="settings.updatepal();"/>
+                        <label for="hcol1">L: </label>
+                        <input type="number" id="lcol1" min="0" max="100" value="85" onchange="settings.updatepal();"/>
+                </div>
+                <span class="collab">COLOR 2</span>
+                <div class="hslrow">
+                        <label for="hcol1">H: </label>
+                        <input type="number" id="hcol2" min="0" max="360" value="0" onchange="settings.updatepal();"/>
+                        <label for="hcol1">S: </label>
+                        <input type="number" id="scol2" min="0" max="100" value="0" onchange="settings.updatepal();"/>
+                        <label for="hcol1">L: </label>
+                        <input type="number" id="lcol2" min="0" max="100" value="0" onchange="settings.updatepal();"/>
+                </div>
+            </div>
+                <button id="reset" onclick="settings.resetprog();">RESET PROGRESS</button>
         </menu>
         <canvas id="mbcanvas"></canvas>
         <canvas id="mnbcanvas"></canvas>
         <canvas id="rbcanvas"></canvas>
         <canvas id="sbcanvas"></canvas>
-        <div class="movb">
+        <div class="movb" id="movb">
             <canvas id="rdcanvas"></canvas>
             <canvas id="lacanvas"></canvas>
             <canvas id="uwcanvas"></canvas>
@@ -76,7 +109,8 @@
             <button id="rdbutton" onclick="settings.rdbutton(); this.blur();"></button>
         </div>
         <button id="mutebutton" onclick="settings.soundmute(); this.blur();"></button>
-        <button id="menubutton" onclick="settings.menushow(); this.blur();"></button>
+        <button id="menubutton" onclick="settings.coloropt(); settings.menushow(); this.blur();"></button>
+        </div>
         <button id="resetbutton" onclick="settings.rbutton(); this.blur();"></button>
         <button id="switchbutton" onclick="settings.sbutton(); this.blur();"></button>
 </body>

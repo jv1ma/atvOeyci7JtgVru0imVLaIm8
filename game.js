@@ -23,6 +23,12 @@ mutebuttoncanvas.height = menubuttoncanvas.height = switchbuttoncanvas.height = 
 rightbuttoncanvas.width = leftbuttoncanvas.width = downbuttoncanvas.width = upbuttoncanvas.height = 96;
 rightbuttoncanvas.height = leftbuttoncanvas.height = downbuttoncanvas.height = upbuttoncanvas.width = 96;
 
+SC_HEIGHT = 0;
+SC_WIDTH = 0;
+palette = [{hsl:[0, 0, 100]}, {hsl:[0, 0, 0]}]
+noiseen = 1;
+solidbk = 0;
+
 const menu = document.getElementById('menu');
 menu.height = document.body.clientHeight;
 const rstbut = document.getElementById('reset');
@@ -45,8 +51,10 @@ const movesfx = new Audio();
 movesfx.src = 'sfx/move.wav';
 const errorsfx = new Audio();
 errorsfx.src = 'sfx/error.wav';
-const switchsfx = new Audio();
-switchsfx.src = 'sfx/switch.wav';
+const switch1sfx = new Audio();
+switch1sfx.src = 'sfx/switch1.wav';
+const switch2sfx = new Audio();
+switch2sfx.src = 'sfx/switch2.wav';
 const resetsfx = new Audio();
 resetsfx.src = 'sfx/noise.wav';
 
@@ -119,10 +127,41 @@ class Settings {
         this.mute = 0;
     }
     updateres() {
-        rs = rsopt.value;
+        if (document.getElementById('autosc').checked === true)
+            rs = Math.pow(2, rsopt.value-1+level.sc[rsopt.value-1]) * 16;
+        else
+            rs = Math.pow(2, rsopt.value-1) * 16;
         pix = rs / 16;
         SC_HEIGHT = display.height = background.height = wallc.height = wallcl.height = level.gridsize[1]*rs;
         SC_WIDTH = display.width = background.width = wallc.width = wallcl.width = level.gridsize[0]*rs;
+    }
+    updatepal() {
+        if (document.getElementById('owcol').checked === false) {
+            palette = [level.pal1, level.pal2];
+        }
+        else {
+            palette = [{hsl:[document.getElementById('hcol1').value, document.getElementById('scol1').value, document.getElementById('lcol1').value]}, 
+                       {hsl:[document.getElementById('hcol2').value, document.getElementById('scol2').value, document.getElementById('lcol2').value]}]
+        }
+        
+    }
+    updatenoise() {
+        if (document.getElementById('rmnoise').checked === false) {
+            noisevoid.style.visibility = 'visible';
+            noiseen = 1;
+        }
+        else {
+            noisevoid.style.visibility = 'hidden';
+            noiseen = 0;
+        }
+    }
+    updatesolidbk (){
+        if (document.getElementById('solidbk').checked === false) {
+            solidbk = 0;
+        }
+        else {
+            solidbk = 1;
+        }
     }
     menushow() {
         if (menu.style.visibility === 'hidden') {
@@ -130,6 +169,7 @@ class Settings {
         }
         else {
             menu.style.visibility = 'hidden';
+            document.getElementById('coloropt').style.visibility = 'collapse';
         }
     }
     soundmute(x) {
@@ -155,7 +195,8 @@ class Settings {
             pushsfx.volume = sfxvol.value / 10;
             movesfx.volume = sfxvol.value / 10;
             resetsfx.volume = sfxvol.value / 10;
-            switchsfx.volume = sfxvol.value / 10;
+            switch1sfx.volume = sfxvol.value / 10;
+            switch2sfx.volume = sfxvol.value / 10;
         }
         else {
             ambience.volume = 0;
@@ -168,13 +209,22 @@ class Settings {
             pushsfx.volume = 0;
             movesfx.volume = 0;
             resetsfx.volume = 0;
-            switchsfx.volume = 0;
+            switch1sfx.volume = 0;
+            switch2sfx.volume = 0;
         }
     }
     resetprog() {
         stg = 0;
         document.cookie = `stg=0; max-age=0`;
         reset();
+    }
+    coloropt(){
+        if (document.getElementById('owcol').checked == true) {
+            document.getElementById('coloropt').style.visibility = 'visible';
+        }
+        else {
+            document.getElementById('coloropt').style.visibility = 'collapse';
+        }
     }
     rbutton() {
         keys.push('r');
@@ -195,10 +245,16 @@ class Settings {
         keys.push('d');
     }
     render() {
-        rbctxt.fillStyle = sbctxt.fillStyle = uwctxt.fillStyle = dsctxt.fillStyle = lactxt.fillStyle = rdctxt.fillStyle = 
-        `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%)`;
+        if (menu.style.visibility === 'visible') {
         mbctxt.fillStyle = mnbctxt.fillStyle = 
         `hsl(${palette[Math.abs(colorstate-1)].hsl[0]}, ${palette[Math.abs(colorstate-1)].hsl[1]}%, ${palette[Math.abs(colorstate-1)].hsl[2]}%)`;
+        }
+        else {
+            mbctxt.fillStyle = mnbctxt.fillStyle = 
+            `hsl(${palette[(colorstate)].hsl[0]}, ${palette[(colorstate)].hsl[1]}%, ${palette[(colorstate)].hsl[2]}%)`;
+        }
+        rbctxt.fillStyle = sbctxt.fillStyle = uwctxt.fillStyle = dsctxt.fillStyle = lactxt.fillStyle = rdctxt.fillStyle = 
+            `hsl(${palette[(colorstate)].hsl[0]}, ${palette[(colorstate)].hsl[1]}%, ${palette[(colorstate)].hsl[2]}%)`;
         mbctxt.clearRect(0, 0, 96, 96);
         mnbctxt.clearRect(0, 0, 96, 96);
         rbctxt.clearRect(0, 0, 96, 96);
@@ -278,6 +334,15 @@ class Settings {
             rdctxt.fillRect(30, 42, 36, 12);
             rdctxt.fillRect(48, 30, 6, 36);
             rdctxt.fillRect(54, 36, 6, 24);
+
+            document.getElementById('movb').style.visibility = 'visible';
+            document.getElementById('resetbutton').style.visibility = 'visible';
+            document.getElementById('switchbutton').style.visibility = 'visible';
+        }
+        else {
+            document.getElementById('movb').style.visibility = 'collapse';
+            document.getElementById('resetbutton').style.visibility = 'collapse';
+            document.getElementById('switchbutton').style.visibility = 'collapse';
         }
     }
 }
@@ -346,24 +411,32 @@ function reset() {
     }
     else {
         ambience.pause();
+        ambience.currentTime = 0;
     }
     if (stg >= 4 && stg < 10) {
         track1.play();
     }
     else {
         track1.pause();
+        track1.currentTime = 0;
     }
     if (stg >= 10 && stg < 15) {
         track2.play();
     }
     else {
         track2.pause();
+        track2.currentTime = 0;
     }
-    if (stg >= 15) {
+    if (stg >= 15 && stg < 21) {
         track3.play();
     }
-    if (stg > 15) {
+    else {
         track3.pause();
+        track3.currentTime = 0;
+    }
+    if (stg > 20) {
+        track3.pause();
+        track3.currentTime = 0;
         settings.soundmute(1);
         endscreen.style.visibility = 'visible';
     }
@@ -373,10 +446,9 @@ function reset() {
 
     level = levels.data[stg];
 
-    SC_HEIGHT = display.height = background.height = wallc.height = wallcl.height = level.gridsize[1]*rs;
-    SC_WIDTH = display.width = background.width = wallc.width = wallcl.width = level.gridsize[0]*rs;
-
-    palette = [level.pal1, level.pal2]
+    settings.updateres();
+    settings.updatepal();
+    settings.updatenoise();
     px = level.px;
     py = level.py;
     boxes = [];
@@ -411,19 +483,19 @@ reset();
 class Input {
     constructor() {
         window.addEventListener('keydown', e => {
-            console.log(e.key);
-            if (    e.key === 'w' || 
-                    e.key === 'a' || 
-                    e.key === 's' || 
-                    e.key === 'd' || 
-                    e.key === 'r' || 
-                    e.key === 'ArrowUp' || 
-                    e.key === 'ArrowLeft' || 
-                    e.key === 'ArrowDown' || 
-                    e.key === 'ArrowRight' || 
-                    e.key === ' ' && keys.indexOf(e.key) === -1) {
-                keys.push(e.key);
-            }
+                console.log(e.key);
+                if (        e.key === 'w' || 
+                        e.key === 'a' || 
+                        e.key === 's' || 
+                        e.key === 'd' || 
+                        (e.key === 'r' && !e.repeat) || 
+                        e.key === 'ArrowUp' || 
+                        e.key === 'ArrowLeft' || 
+                        e.key === 'ArrowDown' || 
+                        e.key === 'ArrowRight' || 
+                        (e.key === ' ' && keys.indexOf(e.key) === -1 && !e.repeat)) {
+                    keys.push(e.key);
+                }
         });
     }
 }
@@ -635,13 +707,16 @@ class Player {
             }
             if (keys[a] === ' ') {
                 kspc = 15;
-                switchsfx.currentTime = 0;
-                switchsfx.play();
+                switch1sfx.currentTime = switch2sfx.currentTime = 0;
                 if (colorstate === 0) {
                     colorstate = 1;
+                    switch2sfx.pause();
+                    switch1sfx.play();
                 }
                 else {
                     colorstate = 0;
+                    switch1sfx.pause();
+                    switch2sfx.play();
                 }
                 fadea = 1;
             }
@@ -653,9 +728,15 @@ class Player {
         `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%)`;
         display.style.borderColor = 
         `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%)`;
+        if (solidbk === 0) {
         document.body.style.background = 
         `radial-gradient(100% 200% at center, ${hslToHex(palette[Math.abs(colorstate-1)].hsl[0], palette[Math.abs(colorstate-1)].hsl[1], palette[Math.abs(colorstate-1)].hsl[2])}, 
         ${hslToHex(palette[colorstate].hsl[0],palette[colorstate].hsl[1],palette[colorstate].hsl[2])}`;
+        }
+        else {
+            document.body.style.background = `none`;
+            document.body.style.backgroundColor = `hsl(${palette[Math.abs(colorstate-1)].hsl[0]}, ${palette[Math.abs(colorstate-1)].hsl[1]}%, ${palette[Math.abs(colorstate-1)].hsl[2]}%)`
+        }
 
         menu.style.backgroundColor = `hsl(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%)`
         menu.style.color = `hsl(${palette[Math.abs(colorstate-1)].hsl[0]}, ${palette[Math.abs(colorstate-1)].hsl[1]}%, ${palette[Math.abs(colorstate-1)].hsl[2]}%)`
@@ -680,7 +761,7 @@ class Player {
             context.fillRect(px*rs+(pix*4), py*rs+(pix*10), (pix*2), (pix*2));
             context.fillRect(px*rs+(pix*5), py*rs+(pix*9), (pix*2), (pix*2));
             context.fillRect(px*rs+(pix*10), py*rs+(pix*10), (pix*2), (pix*2));
-            context.fillRect(px*rs+(pix*9), py*rs+(pix*9), (pix*2), (pix*2));
+            context.fillRect(px*rs+(pix*9), py*rs+(pix*9), (pix*2), (pix*2)); 
 
             context.fillRect(px*rs+(pix*6), py*rs+(pix*6), (pix*4), (pix*4));
 
@@ -780,12 +861,14 @@ class Background {
             }
         }
         bga--;
-        for (let w = 0; w < SC_WIDTH / pix; w++) {
-            for(let h = 0; h < SC_HEIGHT / pix; h++) {
-                let alpha = Math.random() - 0.8;
-                if (alpha >= 0) {
-                    context.fillStyle = `hsla(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%, ${alpha*Math.random()+0.1})`
-                    context.fillRect(w*pix, h*pix, pix, pix);
+        if (noiseen === 1) {
+            for (let w = 0; w < SC_WIDTH / pix; w++) {
+                for(let h = 0; h < SC_HEIGHT / pix; h++) {
+                    let alpha = Math.random() - 0.8;
+                    if (alpha >= 0) {
+                        context.fillStyle = `hsla(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%, ${alpha*Math.random()+0.1})`
+                        context.fillRect(w*pix, h*pix, pix, pix);
+                    }
                 }
             }
         }
@@ -1001,19 +1084,24 @@ class Wall {
                         }
 
                         context2.fillStyle = `hsla(${palette[colorstate].hsl[0]}, ${palette[colorstate].hsl[1]}%, ${palette[colorstate].hsl[2]}%, 0.3)`
-                        let e = 0;
-                        let ran = 0;
-                        for (let i = 0; e < 16; i++) {
-                            if (i === 8) {
-                                i = 0;
-                                e++;
-                                if (e === 8) break;
-                            }
-                            seed = i * 2 * e + 64 + colorstate + seed;
-                            ran = random();
-                            if (ran >= 0.5) {
+                        if (noiseen == 1) {
+                            let e = 0;
+                            let ran = 0;
+                            for (let i = 0; e < 16; i++) {
+                                if (i === 8) {
+                                    i = 0;
+                                    e++;
+                                    if (e === 8) break;
+                                }
+                                seed = i * 2 * e + 64 + colorstate + seed;
+                                ran = random();
+                                if (ran >= 0.5) {
                                 context2.fillRect(c*rs+(pix*2)*i, r*rs+(pix*2)*e, (pix*2), (pix*2));
+                                }
                             }
+                        }
+                        else {
+                            context2.fillRect(c*rs, r*rs, rs, rs);
                         }
                     }
                 }
